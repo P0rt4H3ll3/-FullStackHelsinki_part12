@@ -32,17 +32,36 @@ docker container run <IMAGE_NAME>
 
 docker container run hello-world
 
-docker: error during connect: Head "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/\_ping": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
-See 'docker run --help'.
-
-i opened Docker app on Computer and run again in the console pwsh
-
-docker container run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 c1ec31eb5944: Pull complete
 Digest: sha256:91fb4b041da273d5a3273b6d587d62d518300a6ad268b28628f74997b93171b2
 Status: Downloaded newer image for hello-world:latest
+
+```bash
+docker container run -it <IMAGE_NAME>
+```
+
+-it make sure we can interact with the container.
+-After the options, we defined that the image to run is ubuntu
+
+```bash
+docker container ls -a
+or
+docker ps
+```
+
+list all containers
+
+```bash
+docker start hopeful_clarke
+```
+
+starts the container (not interactiv)
+
+```bash
+docker kill hopeful_clarke
+```
 
 # Start recording your commands with script
 

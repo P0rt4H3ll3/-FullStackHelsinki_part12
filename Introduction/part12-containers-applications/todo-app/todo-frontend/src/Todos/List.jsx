@@ -9,9 +9,8 @@ const TodoList = ({ todos, deleteTodo, completeTodo }) => {
     completeTodo(todo)
   }
   if (!todos) {
-    return []
+    return <p>no todos found</p>
   }
-
   return (
     <>
       {todos
@@ -37,6 +36,7 @@ const TodoList = ({ todos, deleteTodo, completeTodo }) => {
 
           return (
             <div
+              key={todo._id}
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',

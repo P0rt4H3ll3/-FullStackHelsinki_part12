@@ -1,0 +1,112 @@
+Script started on 2024-09-13 09:58:30+02:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="139" LINES="21"]
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ cat  c[K../
+script-answers/ todo-app/       
+]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ cat ../todo-app/todo-backend/
+.dockerignore      Dockerfile         app.js             mongo/             package-lock.json  redis/             util/
+.gitignore         README.md          bin/               node_modules/      package.json       routes/            
+]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ cat ../todo-app/todo-backend/docker[K[K[K[K[K[KDockerfile 
+[?2004lFROM node:20
+
+WORKDIR /usr/src/app
+
+
+COPY --chown=node:node . .
+
+RUN npm ci
+
+ENV DEBUG=todo-backend:*
+
+USER node
+
+CMD npm start[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ cat ../todo-app/todo-backend/Dockerfile [A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ exit[K[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ docker -v[K container ls -a[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ DEBUG=express_app:* node ./bin/www[5P./bin/www[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ [1Pls
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctouch .dockerignore[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ ls  [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker run -p3123:3000 express-server:latest [C[C[C[C[13Pbuild -t express-server .[C[C[C[Crun -p3123:3000 express-server:latest [A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ ls  [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctouch .dockerignore[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ [1Pls
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CDEBUG=express_app:* ./bin/wwwnode ./bin/www[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ dock[12Per container ls -a[C[C[C[K -v[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ exit[K[A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ cat ../todo-app/todo-backend/Dockerfile [A]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdoc ker buyild[K[K[K[Kild -t tod0[Ko-backend ./[K./
+script-answers/ todo-app/       
+]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ docker build -t todo-backend ../
+script-answers/ todo-app/       
+]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ docker build -t todo-backend ../todo-app/todo-backend/
+[?2004l[1A[1B[0G[?25l[+] Building 0.0s (0/0)  docker:default
+[?25h[1A[0G[?25l[+] Building 0.0s (0/0)  docker:default
+[?25h[1A[0G[?25l[+] Building 0.0s (0/0)  docker:default
+[?25h[1A[0G[?25l[+] Building 0.0s (0/1)                                                                                                     docker:default
+[?25h[1A[0G[?25l[+] Building 0.1s (3/3)                                                                                                     docker:default
+[34m => [internal] load build definition from Dockerfile                                                                                  0.0s
+[0m[34m => => transferring dockerfile: 164B                                                                                                  0.0s
+[0m => WARN: JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 14)      0.0s
+[34m => [internal] load metadata for docker.io/library/node:20                                                                            0.0s
+[0m[34m => [internal] load .dockerignore                                                                                                     0.1s
+[0m[34m => => transferring context: 88B                                                                                                      0.0s
+[0m[?25h[1A[1A[1A[1A[1A[1A[1A[0G[?25l[+] Building 0.2s (4/8)                                                                                                     docker:default
+[34m => [internal] load build definition from Dockerfile                                                                                  0.0s
+[0m[34m => => transferring dockerfile: 164B                                                                                                  0.0s
+[0m => WARN: JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 14)      0.0s
+[34m => [internal] load metadata for docker.io/library/node:20                                                                            0.0s
+[0m[34m => [internal] load .dockerignore                                                                                                     0.1s
+[0m[34m => => transferring context: 88B                                                                                                      0.0s
+[0m[34m => [1/4] FROM docker.io/library/node:20                                                                                              0.0s
+[0m => [internal] load build context                                                                                                     0.1s
+[34m => => transferring context: 560B                                                                                                     0.1s
+[0m[?25h[1A[1A[1A[1A[1A[1A[1A[1A[1A[1A[0G[?25l[+] Building 0.4s (9/9) FINISHED                                                                                            docker:default
+[34m => [internal] load build definition from Dockerfile                                                                                  0.0s
+[0m[34m => => transferring dockerfile: 164B                                                                                                  0.0s
+[0m => WARN: JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 14)      0.0s
+[34m => [internal] load metadata for docker.io/library/node:20                                                                            0.0s
+[0m[34m => [internal] load .dockerignore                                                                                                     0.1s
+[0m[34m => => transferring context: 88B                                                                                                      0.0s
+[0m[34m => [1/4] FROM docker.io/library/node:20                                                                                              0.0s
+[0m[34m => [internal] load build context                                                                                                     0.1s
+[0m[34m => => transferring context: 560B                                                                                                     0.1s
+[0m[34m => CACHED [2/4] WORKDIR /usr/src/app                                                                                                 0.0s
+[0m[34m => CACHED [3/4] COPY --chown=node:node . .                                                                                           0.0s
+[0m[34m => CACHED [4/4] RUN npm ci                                                                                                           0.0s
+[0m[34m => exporting to image                                                                                                                0.0s
+[0m[34m => => exporting layers                                                                                                               0.0s
+[0m[34m => => writing image sha256:b4d8fe75bf238cedc6ef25725971791d198cdc19629f0491fa7f21e365619e2c                                          0.0s
+[0m[34m => => naming to docker.io/library/todo-backend                                                                                       0.0s
+[0m[?25h
+ [33m1 warning found (use docker --debug to expand):
+[0m - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 14)
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ doc ker image ls -a
+[?2004lREPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+todo-backend     latest    b4d8fe75bf23   17 minutes ago   1.12GB
+express-server   latest    3f0375c0c44b   18 hours ago     1.1GB
+ts-hello-world   latest    e25cb5f2512d   19 hours ago     1.1GB
+node             20        dd223fd5024d   3 weeks ago      1.1GB
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ t[Kdoc ker run -p 3000:3000 todo-backend:latest [K[K[K[K[K[K[K[K
+[?2004l
+> todo-express-backend@0.0.0 start
+> node ./bin/www
+
+[0mGET / [32m200 [0m3.662 ms - 12[0m
+[0mGET /favicon.ico [33m404 [0m1.373 ms - 150[0m
+[0mGET / [32m200 [0m0.392 ms - 12[0m
+[0mGET /favicon.ico [33m404 [0m0.400 ms - 150[0m
+[0mGET / [32m200 [0m0.293 ms - 12[0m
+[0mGET /favicon.ico [33m404 [0m0.311 ms - 150[0m
+[0mGET / [32m200 [0m0.225 ms - 12[0m
+[0mGET /favicon.ico [33m404 [0m0.713 ms - 150[0m
+[0mGET / [32m200 [0m0.373 ms - 12[0m
+[0mGET /favicon.ico [33m404 [0m0.520 ms - 150[0m
+[0mGET / [32m200 [0m0.374 ms - 12[0m
+[0mGET /favicon.ico [33m404 [0m0.369 ms - 150[0m
+^C^C^C
+got 3 SIGTERM/SIGINTs, forcefully exiting
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ git  [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[Kdoi c[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cc ker do[K[Kcontainer ls -a
+[?2004lCONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS                    NAMES
+d939e6c073a7   todo-backend            "docker-entrypoint.s…"   40 seconds ago   Up 39 seconds               0.0.0.0:3000->3000/tcp   relaxed_booth
+bc3a94611fce   express-server:latest   "docker-entrypoint.s…"   18 hours ago     Exited (137) 18 hours ago                            hardcore_herschel
+15acbfc5274c   node:20                 "docker-entrypoint.s…"   20 hours ago     Exited (0) 19 hours ago                              hello-node
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ doc ker kill rele[Kac[Kxed_booth 
+[?2004lrelaxed_booth
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ docker kill relaxed_booth [C[C[C[C[4Pcontainer ls -a
+[?2004lCONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                       PORTS     NAMES
+d939e6c073a7   todo-backend            "docker-entrypoint.s…"   59 seconds ago   Exited (137) 4 seconds ago             relaxed_booth
+bc3a94611fce   express-server:latest   "docker-entrypoint.s…"   18 hours ago     Exited (137) 18 hours ago              hardcore_herschel
+15acbfc5274c   node:20                 "docker-entrypoint.s…"   20 hours ago     Exited (0) 19 hours ago                hello-node
+[?2004h]0;porta@LAPTOP-6EHS90NO: /mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[01;32mporta@LAPTOP-6EHS90NO[00m:[01;34m/mnt/c/Users/prota/FullStackOpen/FullStackOpen_part12/Introduction/part12-containers-applications/script-answers[00m$ exi t
+[?2004lexit
+
+Script done on 2024-09-13 10:02:12+02:00 [COMMAND_EXIT_CODE="0"]

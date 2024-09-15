@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/todos': 'http://localhost:3000'
+      '/todos': {
+        target: 'http://host.docker.internal:3000', // Use 'backend' as the service name from docker-compose.yml
+        changeOrigin: true
+      }
     }
   },
   test: {

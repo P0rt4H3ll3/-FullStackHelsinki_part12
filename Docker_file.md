@@ -186,7 +186,7 @@ The default port will be 80 for Nginx, so something like -p 8000:80 will work, s
 ### Start DB and Cache Container
 
 ```bash
-docker compose -f ../todo-backend/docker-compose.dev.yml up
+docker compose -f ./file.yml up
 [+] Running 3/3
  ✔ Network todo-backend_default  Created
  ✔ Container mongo               Created

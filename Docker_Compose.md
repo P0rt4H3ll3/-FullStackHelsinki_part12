@@ -52,3 +52,63 @@ volumes:
   mongo_data:
 
 ```
+
+## Multiple services in one DockerCompose
+
+```bash
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+    //...
+
+    volumes:
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo_data:/data/db
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - '6379:6379'
+    environment:
+      REDIS_PASSWORD: redis_example
+    command:
+      [
+        'redis-server',
+        '--appendonly',
+        'yes',
+        '--appendfilename',
+        'appendonly.aof',
+        '--dir',
+        '/data/redis'
+      ]
+    volumes:
+      - redis_data:/data/redis
+volumes:
+  mongo_data:
+  redis_data:
+```
+
+### bring up the two Container
+
+```bash
+docker compose -f selected-file.yml up
+```
+
+### bring them down again
+
+```bash
+docker compose -f selected-file.yml down
+```
+
+-Stops all running containers defined in the docker-compose.yml file.
+-Removes the stopped containers. That's why you couldn't detect them with docker ps -a.
+-Removes the networks that were created by the docker-compose setup.
+
+### change the docker-compose.yml and rebuild the images
+
+```bash
+docker compose -f selected-file.yml up --build
+```

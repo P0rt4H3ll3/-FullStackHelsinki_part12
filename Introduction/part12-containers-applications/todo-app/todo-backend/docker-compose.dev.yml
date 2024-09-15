@@ -5,10 +5,9 @@ services:
     ports:
       - 3456:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: the_database
-
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - mongo_data:/data/db
@@ -19,7 +18,7 @@ services:
     ports:
       - '6379:6379'
     environment:
-      REDIS_PASSWORD: redis_example
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     command:
       [
         'redis-server',
@@ -32,6 +31,7 @@ services:
       ]
     volumes:
       - redis_data:/data/redis
+
 volumes:
   mongo_data:
   redis_data:

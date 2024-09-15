@@ -136,3 +136,65 @@ USER node
 
 CMD npm start
 ```
+
+# build frontend and deploy it in container
+
+## Dockerfile
+
+```bash
+FROM node:20 AS test-stage
+WORKDIR /usr/src/app
+
+COPY . .
+RUN npm ci
+RUN CI=true npm test
+
+FROM test-stage AS build-stage
+WORKDIR /usr/src/app
+COPY . .
+RUN npm ci --only=production
+ENV VITE_BACKEND_URL=http://localhost:3000
+RUN npm run build
+
+# Use Nginx to serve the static files
+FROM nginx:1.25-alpine
+COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
+
+```
+
+Multi-stage builds are designed to split the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages.
+
+With multi-stage builds, a tried and true solution like Nginx can be used to serve static files without a lot of headaches.
+
+### build frontend with docker command
+
+```bash
+
+docker build ./path -t nameImage
+
+```
+
+### run command
+
+```bash
+docker run -p localPORT:internalPORT nameImage
+
+```
+
+The default port will be 80 for Nginx, so something like -p 8000:80 will work, so the parameters of the RUN command need to be changed a bit.
+
+### Start DB and Cache Container
+
+```bash
+docker compose -f ../todo-backend/docker-compose.dev.yml up
+[+] Running 3/3
+ ✔ Network todo-backend_default  Created
+ ✔ Container mongo               Created
+ ✔ Container redis               Created
+```
+
+### also Start Backend locally
+
+```bash
+npm run dev
+```

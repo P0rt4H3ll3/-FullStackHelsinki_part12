@@ -8,5 +8,10 @@ export default defineConfig({
     proxy: {
       '/todos': 'http://localhost:3000'
     }
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './testSetup.js'
   }
 })

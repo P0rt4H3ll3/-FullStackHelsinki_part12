@@ -4,8 +4,22 @@ const router = express.Router()
 const redis = require('../redis')
 
 setRedisCounter = async (key) => {
-  const count = await redis.getAsync(key)
-  await redis.setAsync(key, parseInt(count) + 1)
+  try {
+    const keyPresent = await redis.getAsync(key)
+    console.log(keyPresent)
+    if (keyPresent === null || isNaN(keyPresent)) {
+      console.log('key present is undefined/ null ')
+      await redis.setAsync(key, 0)
+      console.log('key should be set to 0 now ')
+      const keyNow = await redis.getAsync(key)
+      console.log('key now', keyNow)
+    }
+    const count = await redis.getAsync(key)
+    console.log('this is the count', count)
+    await redis.setAsync(key, parseInt(count) + 1)
+  } catch (error) {
+    console.log('While updating redis counter some error occured : ', error)
+  }
 }
 
 /* GET todos listing. */

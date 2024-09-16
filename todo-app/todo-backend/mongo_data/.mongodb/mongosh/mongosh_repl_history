@@ -1,0 +1,5 @@
+use admin
+use the_database
+use admin
+use the_database
+db.createUser({ user: "./todo-backend/", pwd: "./todo-backend/", roles: [{ role: 'root', db: "admin" }] })

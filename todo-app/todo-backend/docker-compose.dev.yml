@@ -1,0 +1,54 @@
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 3456:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo_data:/data/db
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - '6379:6379'
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command:
+      [
+        'redis-server',
+        '--appendonly',
+        'yes',
+        '--appendfilename',
+        'appendonly.aof',
+        '--dir',
+        '/data/redis'
+      ]
+    volumes:
+      - redis_data:/data/redis
+
+  server:
+    image: todo-backend-dev
+    container_name: todo-backend-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/usr/src/app
+    environment:
+      REDIS_URL: redis://redis:6379
+      MONGO_URL: mongodb://the_username:the_password@mongo:27017/the_database
+    depends_on:
+      - mongo
+      - redis
+
+volumes:
+  mongo_data:
+  redis_data:

@@ -1,0 +1,59 @@
+services:
+  app:
+    image: blog-frontend
+    build:
+      context: ./bloglist-Frontend # The context will pick this directory as the "build context"
+      dockerfile: .-Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./bloglist-frontend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+      - /usr/src/app/node_modules # This will avoid conflicts with the host's node_modules
+    ports:
+      - 5173:80
+    container_name: bloglist-frontend # This will name the container hello-front-dev
+    environment:
+      DANGEROUSLY_DISABLE_HOST_CHECK: true # for dev env should be ok, production would need a proper solution for invalid host header error
+      WDS_SOCKET_PORT: 5173
+      # HOST: 127.0.0.1
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 3456:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - ./bloglist-Backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo_data:/data/db
+
+  server:
+    image: bloglist-backend
+    ports:
+      - 3000:3000
+    build:
+      context: ./bloglist-backend/ # The context will pick this directory as the "build context"
+      dockerfile: ./Dockerfile # This will simply tell which dockerfile to read
+    environment:
+      MONGODB_URI: mongodb://the_username:the_password@mongo:27017/the_database?retryWrites=true&w=majority
+      TEST_MONGODB_URI: mongodb://the_username:the_password@mongo:27017/the_database_test?retryWrites=true&w=majority # THE port mapping - container port must be used!
+      SECRET: 'thisismysecretidontknowyours'
+      PORT: 3000
+    volumes: # Declare the volume
+      - ./bloglist-backend/src/:/usr/src/app/src/
+    container_name: bloglist-backend
+  #  reverse proxy
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app
+      - server
+
+volumes:
+  mongo_data:

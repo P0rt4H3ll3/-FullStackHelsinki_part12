@@ -1,13 +1,15 @@
 services:
   app:
     image: todo-front-dev
+    container_name: todo-front-dev
     build:
       context: ./
-      dockerfile: dev.Dockerfile # Your Dockerfile for the frontend
+      dockerfile: Dockerfile # Your Dockerfile for the frontend
     volumes:
       - ./:/usr/src/app
     ports:
-      - 5173:5173
-    container_name: todo-front-dev
+      - 5173:3000
+    environment:
+      VITE_BACKEND_URL: http://127.0.0.1:3000
   # debug-helper:
   #   image: busybox

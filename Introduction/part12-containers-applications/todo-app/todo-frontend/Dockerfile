@@ -9,7 +9,7 @@ FROM test-stage AS build-stage
 WORKDIR /usr/src/app
 COPY . .
 RUN npm ci --only=production
-ENV VITE_BACKEND_URL=http://localhost:3000
+ENV VITE_BACKEND_URL="http://127.0.0.1:3000/"
 RUN npm run build
 
 # Use Nginx to serve the static files
